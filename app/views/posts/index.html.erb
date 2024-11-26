@@ -1,0 +1,29 @@
+<%if current_user%>
+  <div style="border: 1px solid; max-width: 680px;align-items: center ;display: flex;flex-direction: column;justify-content: center">
+    <h1>All Posts</h1>
+    <div id="posts_list">
+      <%@posts.each do |post|%>
+      	<ul>
+      		<li>
+            <div style="display: flex;">
+        			<button style="background-color: black;margin-right: 20px"><%=link_to post.title,post_path(post),style: "color: white; text-decoration: none;" %></button>
+                
+          				<%if post.user ==current_user%>
+          					<button style="background-color: blue;"><%=link_to "Edit",edit_post_path(post),style:"color: white;text-decoration:none"%></button>
+          					<%=button_to "Delete Post",post_path(post),method: :delete, data:{confirm:"are you sure to delete the post?"},style:"color: white;background-color:black;text-decoration:none"%>
+          				<%end%><br>
+            </div>
+            <%= link_to "Create New Comment",new_post_comment_path(post)%><br>
+              <% if post.comments.any? %>
+                <strong>Comments</strong>
+                <%post.comments.each do |comment|%>
+                  <%=comment.content%>
+                <%end%>
+              <%end%>
+      		</li>
+      	</ul>
+      <%end%>
+    </div>
+    <button style="background-color: purple;padding:5px"><%=link_to "Create New Post",new_post_path,style:"color: white;text-decoration:none"%></button>
+  </div>
+<%end%>

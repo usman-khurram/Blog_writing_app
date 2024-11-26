@@ -1,0 +1,14 @@
+<%=form_with model: @post, remote: true do |form|%>
+<div>
+  <%=form.label :title%><br>
+  <%=form.text_field :title%><br>
+</div>
+<div>
+  <%=form.label :description%><br>
+  <%=form.text_field :description%><br>
+</div>
+<div>
+  <%=form.submit%><br>
+</div>
+
+<%end%>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BlogAppProject</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <main class="container mx-auto mt-28 px-5 flex">
+      <%= yield %>
+      
+      <% if user_signed_in? %>
+        <p>Welcome, <%= current_user.email %>!</p>
+        <%= button_to 'Logout', destroy_user_session_path, method: :delete ,data:{confirm:"are you sure to logout?"}%>
+      <% else %>
+        <%= button_to 'Login', new_user_session_path %>
+        <%= button_to 'Sign Up', new_user_registration_path%>
+      <% end %>
+    </main>
+  </body>
+</html>
